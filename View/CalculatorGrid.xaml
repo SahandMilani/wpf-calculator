@@ -23,11 +23,11 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-            <!-- Add more RowDefinitions as needed -->
         </Grid.RowDefinitions>
 
-        <Label Content="{Binding Result, Mode=OneWay}" FontSize="20" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4"
-           HorizontalAlignment="Right" Margin="0,0,4,0" VerticalAlignment="Center" Panel.ZIndex="1"/>
+        <Label Content="{Binding Result}" FontSize="20" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4"
+           HorizontalAlignment="Right" Margin="0,0,4,0" VerticalAlignment="Center" Panel.ZIndex="1">
+        </Label>
         <Rectangle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Fill="AliceBlue" Margin="4 4 4 8" />
 
         <Button Content="7" Grid.Column="0" Grid.Row="2" Command="{Binding ButtonPressedCommand}" CommandParameter="7" Style="{StaticResource DigitButtonStyle}"/>

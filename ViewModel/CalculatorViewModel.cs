@@ -7,9 +7,9 @@ public class CalculatorViewModel : BaseViewModel
 {
     Calculator calculator;
 
-    private string? result;
+    private string result;
 
-    public string? Result
+    public string Result
     {
         get { return result; }
         set
@@ -18,6 +18,7 @@ public class CalculatorViewModel : BaseViewModel
             OnPropertyChanged();
         }
     }
+
     private ICommand _buttonPressedCommand;
 
     public ICommand ButtonPressedCommand
@@ -35,11 +36,22 @@ public class CalculatorViewModel : BaseViewModel
     public CalculatorViewModel()
     {
         calculator = new Calculator();
+        calculator.OnResultUpdate += UpdateResult;
+        calculator.OnCalculationError += ShowError;
+    }
+
+    void UpdateResult(string updatedResult)
+    {
+        Result = updatedResult;
+    }
+
+    void ShowError(string error)
+    {
+        MessageBox.Show(error, caption: "Error");
     }
 
     private void ExecuteButtonPressedCommand(string param)
     {
-        // Logic to execute when the command is invoked
-        MessageBox.Show("Button clicked!" + param);
+        calculator.AddNewChar(param);
     }
 }

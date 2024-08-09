@@ -1,32 +1,42 @@
-﻿using System.Windows;
-
-namespace WpfCalculator.Model;
+﻿namespace WpfCalculator.Model;
 public class Calculator
 {
     readonly HashSet<string> operators = new() { "+", "-", "*", "/", "=" };
     readonly HashSet<string> numbers = new() { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "." };
     readonly HashSet<string> deleteCommands = new() { "←", "C", "CE" };
 
+    public event Action<string>? OnResultUpdate;
+    public event Action<string>? OnCalculationError;
+
+
+    bool finishedState = false;
+
     List<string> parts = new();
 
-    private string? result;
+    private string result = "0";
 
-    public string? Result
+    public string Result
     {
         get { return result; }
         set
         {
             result = value;
-            // call to update
+            OnResultUpdate?.Invoke(value);
         }
     }
 
-    public void AddChar(string nextChar)
+    public void AddNewChar(string nextChar)
     {
+        if (finishedState && !operators.Contains(nextChar))
+            ClearAll();
+
+        finishedState = false;
+
         if (deleteCommands.Contains(nextChar))
         {
             if (nextChar == "←")
                 DeleteCharFromEnd();
+
             if (nextChar == "C")
                 ClearAll();
         }
@@ -112,6 +122,7 @@ public class Calculator
     void ClearAll()
     {
         parts.Clear();
+        UpdateResult();
     }
 
     void UpdateResult()
@@ -134,14 +145,16 @@ public class Calculator
 
         foreach (var (op, func) in operatorsByOrder)
         {
-            for (int i = 0; i < partsClone.Count; i++)
+            for (int i = 1; i < partsClone.Count - 1; i++)
             {
                 if (partsClone[i] == op)
                 {
-                    double expressionResult = func(double.Parse(partsClone[i - 1]), double.Parse(partsClone[i + 1]));
-                    if (double.IsInfinity(expressionResult))
+                    var op1 = double.Parse(partsClone[i - 1]);
+                    var op2 = double.Parse(partsClone[i + 1]);
+                    double expressionResult = func(op1, op2);
+                    if (double.IsInfinity(expressionResult) || double.IsNaN(expressionResult))
                     {
-                        MessageBox.Show("ERROR");
+                        OnCalculationError?.Invoke("Divided by zero!");
                         return;
                     }
                     partsClone[i] = expressionResult.ToString();
@@ -151,9 +164,9 @@ public class Calculator
                 }
             }
         }
-        //MessageBox.Show(parts[0]);
 
         parts = new List<string>(partsClone);
+        finishedState = true;
     }
 
 

@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 
 namespace WpfCalculator.ViewModel;
-public class BaseViewModel
+public class BaseViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
 

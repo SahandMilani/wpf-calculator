@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfCalculator" xmlns:view="clr-namespace:WpfCalculator.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="400">
+        Title="Calculator" Height="550" Width="400">
     <Grid Width="Auto" Height="Auto" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
         <view:CalculatorGrid />
     </Grid>
