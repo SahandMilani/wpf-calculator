@@ -8,13 +8,10 @@ public class Calculator
     public event Action<string>? OnResultUpdate;
     public event Action<string>? OnCalculationError;
 
-
     bool finishedState = false;
-
     List<string> parts = new();
 
     private string result = "0";
-
     public string Result
     {
         get { return result; }
@@ -50,7 +47,6 @@ public class Calculator
         {
             if (nextChar == "=")
                 Calculate();
-
             else
                 AddOperatorToEnd(nextChar);
         }
@@ -116,7 +112,6 @@ public class Calculator
 
         if (parts[^1] == "")
             parts.RemoveAt(parts.Count - 1);
-
     }
 
     void ClearAll()
@@ -142,6 +137,14 @@ public class Calculator
                 {"+", (a, b) => a + b},
                 {"-", (a, b) => a - b}
             };
+
+        if (partsClone.Count == 0)
+            return;
+
+        if (operatorsByOrder.ContainsKey(partsClone.Last()))
+        {
+            partsClone.RemoveAt(partsClone.Count - 1);
+        }
 
         foreach (var (op, func) in operatorsByOrder)
         {
