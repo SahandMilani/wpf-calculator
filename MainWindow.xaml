@@ -3,55 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfCalculator"
+        xmlns:local="clr-namespace:WpfCalculator" xmlns:view="clr-namespace:WpfCalculator.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="400">
+        Title="MainWindow" Height="550" Width="400">
     <Grid Width="Auto" Height="Auto" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
-        <Label Content="{Binding Result, Mode=TwoWay}"  FontSize="32" HorizontalAlignment="Center" Margin="0,16,0,0" VerticalAlignment="Top" />
-        <Grid x:Name="KeysGrid" Margin="24,260,32,64" Grid.Row="5" Grid.Column="4" RenderTransformOrigin="0.5,0.5">
-            <Grid.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="Margin" Value="4"/>
-                </Style>
-            </Grid.Resources>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-                <!-- Add more RowDefinitions as needed -->
-            </Grid.RowDefinitions>
-            
-            <Button Content="7" Tag="7" Grid.Column="0" Grid.Row="1" Click="Button_Click" Style="{StaticResource DigitButtonStyle}"/>
-            <Button Content="8" Tag="8" Grid.Column="1" Grid.Row="1" Click="Button_Click" Style="{StaticResource DigitButtonStyle}"/>
-            <Button Content="9" Tag="9" Grid.Column="2" Grid.Row="1" Click="Button_Click" Style="{StaticResource DigitButtonStyle}"/>
-            <Button Content="4" Tag="4" Grid.Column="0" Grid.Row="2" Click="Button_Click" Style="{StaticResource DigitButtonStyle}"/>
-            <Button Content="5" Tag="5" Grid.Column="1" Grid.Row="2" Click="Button_Click" Style="{StaticResource DigitButtonStyle}"/>
-            <Button Content="6" Tag="6" Grid.Column="2" Grid.Row="2" Click="Button_Click" Style="{StaticResource DigitButtonStyle}"/>
-            <Button Content="1" Tag="1" Grid.Column="0" Grid.Row="3" Click="Button_Click" Style="{StaticResource DigitButtonStyle}"/>
-            <Button Content="2" Tag="2" Grid.Column="1" Grid.Row="3" Click="Button_Click" Style="{StaticResource DigitButtonStyle}"/>
-            <Button Content="3" Tag="3" Grid.Column="2" Grid.Row="3" Click="Button_Click" Style="{StaticResource DigitButtonStyle}"/>
-            <Button Content="0" Tag="0" Grid.Column="0" Grid.Row="4" Click="Button_Click" Style="{StaticResource DigitButtonStyle}"/>
-            <Button Content="." Tag="." Grid.Column="1" Grid.Row="4" Click="Button_Click" Style="{StaticResource DigitButtonStyle}"/>
-
-            <Button Content="←" Tag="←" Grid.Column="2" Grid.Row="0" Click="Button_Click" Style="{StaticResource DeleteButtonStyle}"/>
-            <Button Content="C" Tag="C" Grid.Column="1" Grid.Row="0" Click="Button_Click" Style="{StaticResource DeleteButtonStyle}"/>
-            <Button Content="CE" Tag="CE" Grid.Column="0" Grid.Row="0" Click="Button_Click" Style="{StaticResource DeleteButtonStyle}"/>
-
-            <Button Content="/" Tag="/" Grid.Column="3" Grid.Row="0" Click="Button_Click" Style="{StaticResource OperandButtonStyle}" />
-            <Button Content="*" Tag="*" Grid.Column="3" Grid.Row="1" Click="Button_Click" Style="{StaticResource OperandButtonStyle}" />
-            <Button Content="-" Tag="-" Grid.Column="3" Grid.Row="2" Click="Button_Click" Style="{StaticResource OperandButtonStyle}" />
-            <Button Content="+" Tag="+" Grid.Column="3" Grid.Row="3" Grid.RowSpan="2" Click="Button_Click" Style="{StaticResource OperandButtonStyle}" />
-
-            <Button Content="=" Tag="=" Grid.Column="2" Grid.Row="4" Click="Button_Click"  Style="{StaticResource CalculateButtonStyle}" />
-
-        </Grid>
+        <view:CalculatorGrid />
     </Grid>
 </Window>
